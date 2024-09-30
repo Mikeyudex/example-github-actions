@@ -1,7 +1,8 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Hola mundo
+name: Aprendiendo GitHub Actions
+run-name: Estoy aprendiendo Github Actions
 on:
   push:
     branches: [ "main" ]
@@ -12,12 +13,13 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  hola-mundo:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository  
+      uses: actions/checkout@v4
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -27,6 +29,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Definir nombre de usuario
+      run: |
+        echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
     - name: Print function definition
       run: |
-        python main.py
+        python hola_mundo.py
